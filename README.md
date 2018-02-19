@@ -2,6 +2,9 @@
 
 This is a custom mode for [@mapbox/mapbox-gl-draw]() that simplifies drawing to a single free drawing.
 
+## !! WORK IN PROGRESS !!
+Right now this is just the framework, development of actual features is in progress
+
 ## Demo
 https://bemky.github.io/mapbox-gl-draw-free-mode/
 
