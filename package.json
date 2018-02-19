@@ -1,0 +1,25 @@
+{
+  "name": "@mapbox/mapbox-gl-draw-free-mode",
+  "version": "0.1",
+  "description": "a free drawing plugin for mapbox-gl-draw",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bemky/mapbox-gl-draw-free-mode.git"
+  },
+  "keywords": [
+    "mapbox",
+    "mapbox-gl",
+    "mapbox-gl-draw",
+    "geojson"
+  ],
+  "author": "Ben Ehmke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bemky/mapbox-gl-draw-free-mode/issues"
+  },
+  "homepage": "https://github.com/bemky/mapbox-gl-draw-free-mode#readme"
+}
