@@ -2,6 +2,9 @@
 
 This is a custom mode for [@mapbox/mapbox-gl-draw]() that simplifies drawing to a single free drawing.
 
+## Demo
+https://bemky.github.io/mapbox-gl-draw-free-mode/
+
 ## Usage
 
 To install:
@@ -31,3 +34,11 @@ map.on('load', function() {
 });
 ```
 
+## Build
+`grunt build`
+
+## Serve
+`grunt serve`
+
+## Deploy Demo
+`grunt deploy`

@@ -33909,13 +33909,9 @@ function extend() {
 var FreeDrawMode = module.exports = {};
 
 FreeDrawMode.onSetup = function() {
-  this.setActionableState({});
-  this.activateUIButton('trash')
+  this.setActionableState();
   return {};
 };
-
-FreeDrawMode.onDrag = function () {
-}
 
 FreeDrawMode.toDisplayFeatures = function(state, geojson, display) {
   display(geojson);
