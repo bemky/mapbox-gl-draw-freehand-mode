@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     browserify: {
       options: {
         alias: {
-          '@mapbox/mapbox-gl-draw-free-mode': './index.js'
+          '@mapbox/mapbox-gl-draw-free-mode': './src/index.js'
         }
       },
       demo: {

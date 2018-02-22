@@ -2,7 +2,7 @@
   "name": "@mapbox/mapbox-gl-draw-free-mode",
   "version": "0.1",
   "description": "a free drawing plugin for mapbox-gl-draw",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +28,7 @@
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^8.0.0",
+    "clipper-lib": "^6.2.1",
     "grunt": "^1.0.2",
     "grunt-browserify": "^5.2.0",
     "grunt-build-control": "^0.7.1",
@@ -36,6 +37,7 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "jit-grunt": "^0.10.0"
+    "jit-grunt": "^0.10.0",
+    "leaflet": "^1.3.1"
   }
 }
