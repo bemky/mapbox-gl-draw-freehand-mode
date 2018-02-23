@@ -68,5 +68,4 @@ FreeDraw.fireUpdate = function() {
     });
 };
 
-
-module.exports = FreeDraw;
+export default FreeDraw

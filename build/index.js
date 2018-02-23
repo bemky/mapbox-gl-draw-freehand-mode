@@ -36674,6 +36674,10 @@ module.exports = {
 },{}],"@mapbox/mapbox-gl-draw-free-mode":[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _common_selectors = require('@mapbox/mapbox-gl-draw/src/lib/common_selectors');
 
 var _common_selectors2 = _interopRequireDefault(_common_selectors);
@@ -36771,6 +36775,6 @@ FreeDraw.fireUpdate = function () {
     });
 };
 
-module.exports = FreeDraw;
+exports.default = FreeDraw;
 
 },{"../src/lib/drag_pan":77,"@mapbox/mapbox-gl-draw/src/constants":13,"@mapbox/mapbox-gl-draw/src/lib/common_selectors":20,"@mapbox/mapbox-gl-draw/src/lib/create_vertex":24,"@mapbox/mapbox-gl-draw/src/lib/double_click_zoom":25,"@mapbox/mapbox-gl-draw/src/lib/is_event_at_coordinates":30,"@mapbox/mapbox-gl-draw/src/modes/draw_polygon":45,"@turf/simplify":64}]},{},[1]);
