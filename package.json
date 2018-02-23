@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-draw-free-mode",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a free drawing plugin for mapbox-gl-draw",
   "main": "src/index.js",
   "scripts": {
