@@ -1,12 +1,13 @@
-const CommonSelectors = require('@mapbox/mapbox-gl-draw/src/lib/common_selectors');
-const doubleClickZoom = require('@mapbox/mapbox-gl-draw/src/lib/double_click_zoom');
-const Constants = require('@mapbox/mapbox-gl-draw/src/constants');
-const isEventAtCoordinates = require('@mapbox/mapbox-gl-draw/src/lib/is_event_at_coordinates');
-const createVertex = require('@mapbox/mapbox-gl-draw/src/lib/create_vertex');
-const DrawPolygon = require('@mapbox/mapbox-gl-draw/src/modes/draw_polygon');
-const dragPan = require('../src/lib/drag_pan');
-const FreeDraw = module.exports = DrawPolygon;
-const simplify = require("@turf/simplify");
+import CommonSelectors from '@mapbox/mapbox-gl-draw/src/lib/common_selectors';
+import doubleClickZoom from '@mapbox/mapbox-gl-draw/src/lib/double_click_zoom';
+import Constants from '@mapbox/mapbox-gl-draw/src/constants';
+import isEventAtCoordinates from '@mapbox/mapbox-gl-draw/src/lib/is_event_at_coordinates';
+import createVertex from '@mapbox/mapbox-gl-draw/src/lib/create_vertex';
+import DrawPolygon from '@mapbox/mapbox-gl-draw/src/modes/draw_polygon';
+import dragPan from '../src/lib/drag_pan';
+import simplify from "@turf/simplify";
+
+const FreeDraw = DrawPolygon;
 
 FreeDraw.onSetup = function() {
     const polygon = this.newFeature({
@@ -66,3 +67,6 @@ FreeDraw.fireUpdate = function() {
         features: this.getSelected().map(f => f.toGeoJSON())
     });
 };
+
+
+module.exports = FreeDraw;

@@ -2,79 +2,80 @@
 
 module.exports = function (grunt) {
 
-  // Load grunt tasks automatically, when needed
-  require('jit-grunt')(grunt, {
-    buildcontrol: 'grunt-build-control'
-  });
+    // Load grunt tasks automatically, when needed
+    require('jit-grunt')(grunt, {
+        buildcontrol: 'grunt-build-control'
+    });
 
-  grunt.initConfig({
-    clean: {
-      demo: ['build']
-    },
-    copy: {
-      demo: {
-        files: {
-          'build/index.html': ['demo/index.html']
-        }
-      }
-    },
-
-    browserify: {
-      options: {
-        alias: {
-          '@mapbox/mapbox-gl-draw-free-mode': './src/index.js'
-        }
-      },
-      demo: {
-        files: {
-          'build/index.js': ['demo/index.js']
+    grunt.initConfig({
+        clean: {
+            demo: ['build']
         },
-        options: {
-          watch: true
-        }
-      }
-    },
+        copy: {
+            demo: {
+                files: {
+                    'build/index.html': ['demo/index.html']
+                }
+            }
+        },
 
-    buildcontrol: {
-      options: {
-        dir: 'build',
-        commit: true,
-        push: true,
-        connectCommits: false,
-        message: 'Built live demo from commit %sourceCommit%'
-      },
-      demo: {
-        options: {
-          // Update the remote to point to your github repo
-          remote: 'git@github.com:bemky/mapbox-gl-draw-free-mode.git',
-          branch: 'gh-pages',
-        }
-      }
-    },
+        browserify: {
+            options: {
+                transform: [["babelify", { "presets": ["es2015"] }]],
+                alias: {
+                    '@mapbox/mapbox-gl-draw-free-mode': './src/index.js'
+                }
+            },
+            demo: {
+                files: {
+                    'build/index.js': ['demo/index.js']
+                },
+                options: {
+                    watch: true
+                }
+            }
+        },
 
-    connect: {
-      dev: {
-        options: {
-          base: 'build',
-          hostname: 'localhost',
-          port: 3000,
-          livereload: true
-        }
-      }
-    },
+        buildcontrol: {
+            options: {
+                dir: 'build',
+                commit: true,
+                push: true,
+                connectCommits: false,
+                message: 'Built live demo from commit %sourceCommit%'
+            },
+            demo: {
+                options: {
+                    // Update the remote to point to your github repo
+                    remote: 'git@github.com:bemky/mapbox-gl-draw-free-mode.git',
+                    branch: 'gh-pages',
+                }
+            }
+        },
 
-    watch: {
-      dev: {
-        files: 'build/index.js',
-        options: {
-          livereload: true
-        }
-      }
-    }
-  });
+        connect: {
+            dev: {
+                options: {
+                    base: 'build',
+                    hostname: 'localhost',
+                    port: 3000,
+                    livereload: true
+                }
+            }
+        },
 
-  grunt.registerTask('build', ['clean', 'copy', 'browserify']);
-  grunt.registerTask('serve', ['build', 'connect', 'watch']);
-  grunt.registerTask('deploy', ['build', 'buildcontrol']);
-  grunt.registerTask('default', ['serve']);
+        watch: {
+            dev: {
+                files: 'build/index.js',
+                options: {
+                    livereload: true
+                }
+            }
+        }
+    });
+
+    grunt.registerTask('build', ['clean', 'copy', 'browserify']);
+    grunt.registerTask('serve', ['build', 'connect', 'watch']);
+    grunt.registerTask('deploy', ['build', 'buildcontrol']);
+    grunt.registerTask('default', ['serve']);
 };

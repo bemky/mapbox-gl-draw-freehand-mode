@@ -7,14 +7,14 @@ document.querySelector('body').appendChild(element);
 
 element.style.height = "90vh";
 
-map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
     container: element,
     style: 'https://tiles.stadiamaps.com/styles/osm_bright.json',
     center: [-122.431272, 37.778008],
     zoom: 12
 });
 
-Draw = new MapboxDraw();
+const Draw = new MapboxDraw();
 map.addControl(Draw, 'top-left');
 
 map.on('draw.create', geojsonFromDrawing);

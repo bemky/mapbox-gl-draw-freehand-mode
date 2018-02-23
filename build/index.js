@@ -1,4 +1,6 @@
 require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+'use strict';
+
 var mapboxgl = require('mapbox-gl');
 var MapboxDraw = require('@mapbox/mapbox-gl-draw');
 var FreeMode = require('@mapbox/mapbox-gl-draw-free-mode');
@@ -8,21 +10,21 @@ document.querySelector('body').appendChild(element);
 
 element.style.height = "90vh";
 
-map = new mapboxgl.Map({
+var map = new mapboxgl.Map({
     container: element,
     style: 'https://tiles.stadiamaps.com/styles/osm_bright.json',
     center: [-122.431272, 37.778008],
     zoom: 12
 });
 
-Draw = new MapboxDraw();
+var Draw = new MapboxDraw();
 map.addControl(Draw, 'top-left');
 
 map.on('draw.create', geojsonFromDrawing);
 map.on('draw.update', geojsonFromDrawing);
 map.on('draw.delete', geojsonFromDrawing);
 
-function geojsonFromDrawing(){
+function geojsonFromDrawing() {
     console.log(Draw.getAll());
 }
 
@@ -36648,9 +36650,11 @@ function extend() {
 }
 
 },{}],77:[function(require,module,exports){
+'use strict';
+
 module.exports = {
-    enable(ctx) {
-        setTimeout(() => {
+    enable: function enable(ctx) {
+        setTimeout(function () {
             // First check we've got a map and some context.
             if (!ctx.map || !ctx.map.dragPan || !ctx._ctx || !ctx._ctx.store || !ctx._ctx.store.getInitialConfigValue) return;
             // Now check initial state wasn't false (we leave it disabled if so)
@@ -36658,8 +36662,8 @@ module.exports = {
             ctx.map.dragPan.enable();
         }, 0);
     },
-    disable(ctx) {
-        setTimeout(() => {
+    disable: function disable(ctx) {
+        setTimeout(function () {
             if (!ctx.map || !ctx.map.dragPan) return;
             // Always disable here, as it's necessary in some cases.
             ctx.map.dragPan.disable();
@@ -36668,22 +36672,50 @@ module.exports = {
 };
 
 },{}],"@mapbox/mapbox-gl-draw-free-mode":[function(require,module,exports){
-const CommonSelectors = require('@mapbox/mapbox-gl-draw/src/lib/common_selectors');
-const doubleClickZoom = require('@mapbox/mapbox-gl-draw/src/lib/double_click_zoom');
-const Constants = require('@mapbox/mapbox-gl-draw/src/constants');
-const isEventAtCoordinates = require('@mapbox/mapbox-gl-draw/src/lib/is_event_at_coordinates');
-const createVertex = require('@mapbox/mapbox-gl-draw/src/lib/create_vertex');
-const DrawPolygon = require('@mapbox/mapbox-gl-draw/src/modes/draw_polygon');
-const dragPan = require('../src/lib/drag_pan');
-const FreeDraw = module.exports = DrawPolygon;
-const simplify = require("@turf/simplify");
+'use strict';
 
-FreeDraw.onSetup = function() {
-    const polygon = this.newFeature({
-        type: Constants.geojsonTypes.FEATURE,
+var _common_selectors = require('@mapbox/mapbox-gl-draw/src/lib/common_selectors');
+
+var _common_selectors2 = _interopRequireDefault(_common_selectors);
+
+var _double_click_zoom = require('@mapbox/mapbox-gl-draw/src/lib/double_click_zoom');
+
+var _double_click_zoom2 = _interopRequireDefault(_double_click_zoom);
+
+var _constants = require('@mapbox/mapbox-gl-draw/src/constants');
+
+var _constants2 = _interopRequireDefault(_constants);
+
+var _is_event_at_coordinates = require('@mapbox/mapbox-gl-draw/src/lib/is_event_at_coordinates');
+
+var _is_event_at_coordinates2 = _interopRequireDefault(_is_event_at_coordinates);
+
+var _create_vertex = require('@mapbox/mapbox-gl-draw/src/lib/create_vertex');
+
+var _create_vertex2 = _interopRequireDefault(_create_vertex);
+
+var _draw_polygon = require('@mapbox/mapbox-gl-draw/src/modes/draw_polygon');
+
+var _draw_polygon2 = _interopRequireDefault(_draw_polygon);
+
+var _drag_pan = require('../src/lib/drag_pan');
+
+var _drag_pan2 = _interopRequireDefault(_drag_pan);
+
+var _simplify = require('@turf/simplify');
+
+var _simplify2 = _interopRequireDefault(_simplify);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FreeDraw = _draw_polygon2.default;
+
+FreeDraw.onSetup = function () {
+    var polygon = this.newFeature({
+        type: _constants2.default.geojsonTypes.FEATURE,
         properties: {},
         geometry: {
-            type: Constants.geojsonTypes.POLYGON,
+            type: _constants2.default.geojsonTypes.POLYGON,
             coordinates: [[]]
         }
     });
@@ -36691,49 +36723,54 @@ FreeDraw.onSetup = function() {
     this.addFeature(polygon);
 
     this.clearSelectedFeatures();
-    doubleClickZoom.disable(this);
-    dragPan.disable(this);
-    this.updateUIClasses({ mouse: Constants.cursors.ADD });
-    this.activateUIButton(Constants.types.POLYGON);
+    _double_click_zoom2.default.disable(this);
+    _drag_pan2.default.disable(this);
+    this.updateUIClasses({ mouse: _constants2.default.cursors.ADD });
+    this.activateUIButton(_constants2.default.types.POLYGON);
     this.setActionableState({
         trash: true
     });
 
     return {
-        polygon,
+        polygon: polygon,
         currentVertexPosition: 0,
         dragMoving: false
     };
 };
 
-FreeDraw.onDrag = FreeDraw.onTouchMove = function (state, e){
+FreeDraw.onDrag = FreeDraw.onTouchMove = function (state, e) {
     state.dragMoving = true;
-    this.updateUIClasses({ mouse: Constants.cursors.ADD });
-    state.polygon.updateCoordinate(`0.${state.currentVertexPosition}`, e.lngLat.lng, e.lngLat.lat);
+    this.updateUIClasses({ mouse: _constants2.default.cursors.ADD });
+    state.polygon.updateCoordinate('0.' + state.currentVertexPosition, e.lngLat.lng, e.lngLat.lat);
     state.currentVertexPosition++;
-    state.polygon.updateCoordinate(`0.${state.currentVertexPosition}`, e.lngLat.lng, e.lngLat.lat);
-}
+    state.polygon.updateCoordinate('0.' + state.currentVertexPosition, e.lngLat.lng, e.lngLat.lat);
+};
 
-FreeDraw.onMouseUp = function (state, e){
+FreeDraw.onMouseUp = function (state, e) {
     if (state.dragMoving) {
         console.log(this.map.getZoom());
-        var tolerance = (3 / ((this.map.getZoom()-4) * 150)) - 0.001 // https://www.desmos.com/calculator/knb1qzuptj
+        var tolerance = 3 / ((this.map.getZoom() - 4) * 150) - 0.001; // https://www.desmos.com/calculator/knb1qzuptj
         console.log(tolerance);
-        simplify(state.polygon, {
+        (0, _simplify2.default)(state.polygon, {
             mutate: true,
             tolerance: tolerance,
             highQuality: true
         });
-            
-        this.fireUpdate();
-        this.changeMode(Constants.modes.SIMPLE_SELECT, { featureIds: [state.polygon.id] });
-    }
-}
 
-FreeDraw.fireUpdate = function() {
-    this.map.fire(Constants.events.UPDATE, {
-        action: Constants.updateActions.MOVE,
-        features: this.getSelected().map(f => f.toGeoJSON())
+        this.fireUpdate();
+        this.changeMode(_constants2.default.modes.SIMPLE_SELECT, { featureIds: [state.polygon.id] });
+    }
+};
+
+FreeDraw.fireUpdate = function () {
+    this.map.fire(_constants2.default.events.UPDATE, {
+        action: _constants2.default.updateActions.MOVE,
+        features: this.getSelected().map(function (f) {
+            return f.toGeoJSON();
+        })
     });
 };
+
+module.exports = FreeDraw;
+
 },{"../src/lib/drag_pan":77,"@mapbox/mapbox-gl-draw/src/constants":13,"@mapbox/mapbox-gl-draw/src/lib/common_selectors":20,"@mapbox/mapbox-gl-draw/src/lib/create_vertex":24,"@mapbox/mapbox-gl-draw/src/lib/double_click_zoom":25,"@mapbox/mapbox-gl-draw/src/lib/is_event_at_coordinates":30,"@mapbox/mapbox-gl-draw/src/modes/draw_polygon":45,"@turf/simplify":64}]},{},[1]);
