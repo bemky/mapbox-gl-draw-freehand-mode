@@ -9,12 +9,12 @@ https://bemky.github.io/mapbox-gl-draw-free-mode/
 
 To install:
 
-`npm i @bemky/mapbox-gl-draw-free-mode`
+`npm i bemky/mapbox-gl-draw-free-mode`
 
 To add to MapboxDraw:
 
 ```js
-require('@mapbox/mapbox-gl-draw-free-mode');
+require('mapbox-gl-draw-free-mode');
 
 // Then build map with draw like usual
 var map = new mapboxgl.Map({
