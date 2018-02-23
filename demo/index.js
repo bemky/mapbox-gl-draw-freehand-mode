@@ -1,6 +1,6 @@
 var mapboxgl = require('mapbox-gl');
 var MapboxDraw = require('@mapbox/mapbox-gl-draw');
-var FreeMode = require('@mapbox/mapbox-gl-draw-free-mode');
+require('@mapbox/mapbox-gl-draw-freehand-mode');
 
 var element = document.createElement('div');
 document.querySelector('body').appendChild(element);

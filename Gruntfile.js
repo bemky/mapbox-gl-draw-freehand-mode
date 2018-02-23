@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             options: {
                 transform: [["babelify", { "presets": ["es2015"] }]],
                 alias: {
-                    '@mapbox/mapbox-gl-draw-free-mode': './src/index.js'
+                    '@mapbox/mapbox-gl-draw-freehand-mode': './src/index.js'
                 }
             },
             demo: {
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
             demo: {
                 options: {
                     // Update the remote to point to your github repo
-                    remote: 'git@github.com:bemky/mapbox-gl-draw-free-mode.git',
+                    remote: 'git@github.com:bemky/mapbox-gl-draw-freehand-mode.git',
                     branch: 'gh-pages',
                 }
             }

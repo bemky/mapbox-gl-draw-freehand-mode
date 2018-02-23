@@ -1,5 +1,5 @@
 {
-  "name": "mapbox-gl-draw-free-mode",
+  "name": "mapbox-gl-draw-freehand-mode",
   "version": "1.0.3",
   "description": "a free drawing plugin for mapbox-gl-draw",
   "main": "src/index.js",

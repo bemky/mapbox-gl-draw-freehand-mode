@@ -3,7 +3,7 @@ require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=
 
 var mapboxgl = require('mapbox-gl');
 var MapboxDraw = require('@mapbox/mapbox-gl-draw');
-var FreeMode = require('@mapbox/mapbox-gl-draw-free-mode');
+require('@mapbox/mapbox-gl-draw-freehand-mode');
 
 var element = document.createElement('div');
 document.querySelector('body').appendChild(element);
@@ -28,7 +28,7 @@ function geojsonFromDrawing() {
     console.log(Draw.getAll());
 }
 
-},{"@mapbox/mapbox-gl-draw":11,"@mapbox/mapbox-gl-draw-free-mode":"@mapbox/mapbox-gl-draw-free-mode","mapbox-gl":71}],2:[function(require,module,exports){
+},{"@mapbox/mapbox-gl-draw":11,"@mapbox/mapbox-gl-draw-freehand-mode":"@mapbox/mapbox-gl-draw-freehand-mode","mapbox-gl":71}],2:[function(require,module,exports){
 module.exports = Extent;
 
 function Extent(bbox) {
@@ -36671,7 +36671,7 @@ module.exports = {
     }
 };
 
-},{}],"@mapbox/mapbox-gl-draw-free-mode":[function(require,module,exports){
+},{}],"@mapbox/mapbox-gl-draw-freehand-mode":[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
