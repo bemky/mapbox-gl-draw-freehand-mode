@@ -10,9 +10,10 @@ document.querySelector('body').appendChild(element);
 
 element.style.height = "90vh";
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZWhta2UiLCJhIjoiY2plYTl6b3c2MHg5ODJxbGV4aXR4Z3p6YSJ9.d3jSAbsqSmpJwyVcp9iXbw';
 var map = new mapboxgl.Map({
     container: element,
-    style: 'https://tiles.stadiamaps.com/styles/osm_bright.json',
+    style: 'mapbox://styles/mapbox/streets-v9',
     center: [-122.431272, 37.778008],
     zoom: 12
 });
