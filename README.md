@@ -3,7 +3,7 @@
 This is a custom mode for [@mapbox/mapbox-gl-draw]() that adds draw functionality to the draw polygon mode.
 
 ## Demo
-https://bemky.github.io/mapbox-gl-draw-free-mode/
+https://bemky.github.io/mapbox-gl-draw-freehand-mode/
 
 ## Usage
 
