@@ -6,11 +6,12 @@ module.exports = function (grunt) {
     require('jit-grunt')(grunt, {
         buildcontrol: 'grunt-build-control'
     });
-
+    
     grunt.initConfig({
         clean: {
             demo: ['build']
         },
+        
         copy: {
             demo: {
                 files: {
@@ -18,7 +19,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-
+        
         browserify: {
             options: {
                 transform: [["babelify", { "presets": ["es2015"] }]],
@@ -32,6 +33,11 @@ module.exports = function (grunt) {
                 },
                 options: {
                     watch: true
+                }
+            },
+            src: {
+                files: {
+                    'dist/mapbox-gl-draw-freehand.js': ['src/index.js']
                 }
             }
         },

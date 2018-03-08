@@ -7,6 +7,13 @@ https://bemky.github.io/mapbox-gl-draw-freehand-mode/
 
 ## Usage
 
+
+### Browser
+Load [mapbox-gl-draw-freehand.js](https://github.com/bemky/mapbox-gl-draw-freehand-mode/blob/master/dist/mapbox-gl-draw-freehand.js)
+
+`MapboxDraw.modes.draw_polygon = require('@mapbox/mapbox-gl-draw-freehand-mode').default;`
+
+### Modularly
 To install:
 
 `npm i bemky/mapbox-gl-draw-free-mode`
