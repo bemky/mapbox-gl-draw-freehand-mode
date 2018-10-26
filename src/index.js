@@ -56,6 +56,10 @@ FreeDraw.onMouseUp = function (state, e){
     }
 }
 
+FreeDraw.onTouchEnd = function(state, e) {
+    this.onMouseUp(state, e)
+}
+
 FreeDraw.fireUpdate = function() {
     this.map.fire(Constants.events.UPDATE, {
         action: Constants.updateActions.MOVE,
