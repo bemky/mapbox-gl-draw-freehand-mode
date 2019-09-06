@@ -16,7 +16,7 @@ Load [mapbox-gl-draw-freehand.js](https://github.com/bemky/mapbox-gl-draw-freeha
 ### Modularly
 To install:
 
-`npm i mapbox-gl-draw-free-mode`
+`npm i mapbox-gl-draw-freehand-mode`
 
 To add to MapboxDraw:
 
