@@ -21,7 +21,7 @@ To install:
 To add to MapboxDraw:
 
 ```js
-require('mapbox-gl-draw-free-mode');
+require('mapbox-gl-draw-freehand-mode');
 
 // Then build map with draw like usual
 var map = new mapboxgl.Map({
