@@ -31,11 +31,11 @@ map.addControl(Draw)
 
 ```
 
-## Build
-`grunt build`
+## Development
+    npm install
 
-## Serve
-`grunt serve`
+### Build
+`npm run build`
 
-## Deploy Demo
-`grunt deploy`
+### Serve
+`npm run start`
