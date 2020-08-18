@@ -6,31 +6,27 @@ This is a custom mode for [@mapbox/mapbox-gl-draw]() that adds draw functionalit
 https://bemky.github.io/mapbox-gl-draw-freehand-mode/
 
 ## Usage
-
-
-### Browser
-Load [mapbox-gl-draw-freehand.js](https://github.com/bemky/mapbox-gl-draw-freehand-mode/blob/master/dist/mapbox-gl-draw-freehand.js)
-
-`MapboxDraw.modes.draw_polygon = require('@mapbox/mapbox-gl-draw-freehand-mode').default;`
-
-### Modularly
 To install:
 
 `npm i mapbox-gl-draw-freehand-mode`
-
-To add to MapboxDraw:
+or 
+Load [mapbox-gl-draw-freehand.js](https://github.com/bemky/mapbox-gl-draw-freehand-mode/blob/master/dist/mapbox-gl-draw-freehand.js)
 
 ```js
-require('mapbox-gl-draw-freehand-mode');
+FreehandMode = require('mapbox-gl-draw-freehand-mode');
 
-// Then build map with draw like usual
+const Draw = new MapboxDraw({
+  modes: Object.assign(MapboxDraw.modes, {
+    draw_polygon: FreehandMode
+  })
+});
+
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v8',
   center: [40, -74.50],
   zoom: 9
 });
-var Draw = new MapboxDraw();
 map.addControl(Draw)
 
 ```

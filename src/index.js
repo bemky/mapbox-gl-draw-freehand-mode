@@ -1,17 +1,16 @@
-import doubleClickZoom from '@mapbox/mapbox-gl-draw/src/lib/double_click_zoom';
-import Constants from '@mapbox/mapbox-gl-draw/src/constants';
 import DrawPolygon from '@mapbox/mapbox-gl-draw/src/modes/draw_polygon';
-import dragPan from '../src/lib/drag_pan';
+import {geojsonTypes, cursors, types, updateActions, modes, events} from '@mapbox/mapbox-gl-draw/src/constants';
+import doubleClickZoom from '@mapbox/mapbox-gl-draw/src/lib/double_click_zoom';
 import simplify from "@turf/simplify";
 
-const FreeDraw = DrawPolygon;
+const FreeDraw = Object.assign({}, DrawPolygon)
 
 FreeDraw.onSetup = function() {
     const polygon = this.newFeature({
-        type: Constants.geojsonTypes.FEATURE,
+        type: geojsonTypes.FEATURE,
         properties: {},
         geometry: {
-            type: Constants.geojsonTypes.POLYGON,
+            type: geojsonTypes.POLYGON,
             coordinates: [[]]
         }
     });
@@ -20,9 +19,14 @@ FreeDraw.onSetup = function() {
 
     this.clearSelectedFeatures();
     doubleClickZoom.disable(this);
-    dragPan.disable(this);
-    this.updateUIClasses({ mouse: Constants.cursors.ADD });
-    this.activateUIButton(Constants.types.POLYGON);
+    // disable dragPan
+    setTimeout(() => {
+        if (!this.map || !this.map.dragPan) return;
+        this.map.dragPan.disable();
+    }, 0);
+
+    this.updateUIClasses({ mouse: cursors.ADD });
+    this.activateUIButton(types.POLYGON);
     this.setActionableState({
         trash: true
     });
@@ -36,7 +40,7 @@ FreeDraw.onSetup = function() {
 
 FreeDraw.onDrag = FreeDraw.onTouchMove = function (state, e){
     state.dragMoving = true;
-    this.updateUIClasses({ mouse: Constants.cursors.ADD });
+    this.updateUIClasses({ mouse: cursors.ADD });
     state.polygon.updateCoordinate(`0.${state.currentVertexPosition}`, e.lngLat.lng, e.lngLat.lat);
     state.currentVertexPosition++;
     state.polygon.updateCoordinate(`0.${state.currentVertexPosition}`, e.lngLat.lng, e.lngLat.lat);
@@ -50,9 +54,9 @@ FreeDraw.onMouseUp = function (state, e){
             tolerance: tolerance,
             highQuality: true
         });
-            
+
         this.fireUpdate();
-        this.changeMode(Constants.modes.SIMPLE_SELECT, { featureIds: [state.polygon.id] });
+        this.changeMode(modes.SIMPLE_SELECT, { featureIds: [state.polygon.id] });
     }
 }
 
@@ -61,8 +65,8 @@ FreeDraw.onTouchEnd = function(state, e) {
 }
 
 FreeDraw.fireUpdate = function() {
-    this.map.fire(Constants.events.UPDATE, {
-        action: Constants.updateActions.MOVE,
+    this.map.fire(events.UPDATE, {
+        action: updateActions.MOVE,
         features: this.getSelected().map(f => f.toGeoJSON())
     });
 };
