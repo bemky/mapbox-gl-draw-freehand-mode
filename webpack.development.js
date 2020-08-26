@@ -1,15 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './docs-src/index.html',
-  module: {
-    rules: [
-      {
-        test: /\.html$/i,
-        loader: 'html-loader',
-      },
-    ],
-  },
+  entry: './docs-src/index.js',
   devServer: {
     contentBase: path.join(__dirname, 'docs'),
     compress: true,
