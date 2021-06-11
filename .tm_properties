@@ -1,0 +1,3 @@
+exclude = '{$exclude,tmp,.git,.tm_properties,node_modules}'
+# excludeInFileChooser = '{$exclude}'
+excludeInFolderSearch = '{$exclude,package-lock.json,dist,docs}'
