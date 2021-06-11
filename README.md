@@ -7,6 +7,7 @@ https://bemky.github.io/mapbox-gl-draw-freehand-mode/
 
 ## Dependencies
 [@mapbox/mapbox-gl-draw](https://www.npmjs.com/package/mapbox-gl-draw)
+
 [@turf/simplify](https://www.npmjs.com/package/@turf/simplify)
 
 ## Usage
