@@ -4,11 +4,11 @@ module.exports = [{
   entry: './example/index.js',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'example'),
+    contentBase: path.join(__dirname, 'docs'),
     port: 9000
   },
   output: {
     filename: 'index.compiled.js',
-    path: path.resolve(__dirname, 'example')
+    path: path.resolve(__dirname, 'docs')
   }
 }]
