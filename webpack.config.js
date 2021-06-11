@@ -1,19 +1,14 @@
 const path = require('path');
 
 module.exports = [{
-  entry: './src/index.js',
-  output: {
-    filename: 'mapbox-gl-draw-freehand.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-}, {
-  entry: './docs-src/index.js',
+  entry: './example/index.js',
   devtool: 'inline-source-map',
-  node: {
-    fs: 'empty'
+  devServer: {
+    contentBase: path.join(__dirname, 'example'),
+    port: 9000
   },
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'docs')
+    filename: 'index.compiled.js',
+    path: path.resolve(__dirname, 'example')
   }
-}];
+}]
