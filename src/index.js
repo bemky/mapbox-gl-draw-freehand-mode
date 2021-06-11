@@ -1,11 +1,10 @@
 import DrawPolygon from '@mapbox/mapbox-gl-draw/src/modes/draw_polygon';
 import {geojsonTypes, cursors, types, updateActions, modes, events} from '@mapbox/mapbox-gl-draw/src/constants';
-import doubleClickZoom from '@mapbox/mapbox-gl-draw/src/lib/double_click_zoom';
 import simplify from "@turf/simplify";
 
-const FreeDraw = Object.assign({}, DrawPolygon)
+const FreehandMode = Object.assign({}, DrawPolygon)
 
-FreeDraw.onSetup = function() {
+FreehandMode.onSetup = function() {
     const polygon = this.newFeature({
         type: geojsonTypes.FEATURE,
         properties: {},
@@ -16,9 +15,8 @@ FreeDraw.onSetup = function() {
     });
 
     this.addFeature(polygon);
-
     this.clearSelectedFeatures();
-    doubleClickZoom.disable(this);
+    
     // disable dragPan
     setTimeout(() => {
         if (!this.map || !this.map.dragPan) return;
@@ -38,7 +36,7 @@ FreeDraw.onSetup = function() {
     };
 };
 
-FreeDraw.onDrag = FreeDraw.onTouchMove = function (state, e){
+FreehandMode.onDrag = FreehandMode.onTouchMove = function (state, e){
     state.dragMoving = true;
     this.updateUIClasses({ mouse: cursors.ADD });
     state.polygon.updateCoordinate(`0.${state.currentVertexPosition}`, e.lngLat.lng, e.lngLat.lat);
@@ -46,29 +44,32 @@ FreeDraw.onDrag = FreeDraw.onTouchMove = function (state, e){
     state.polygon.updateCoordinate(`0.${state.currentVertexPosition}`, e.lngLat.lng, e.lngLat.lat);
 }
 
-FreeDraw.onMouseUp = function (state, e){
+FreehandMode.onMouseUp = function (state, e){
     if (state.dragMoving) {
-        var tolerance = (3 / ((this.map.getZoom()-4) * 150)) - 0.001 // https://www.desmos.com/calculator/b3zi8jqskw
-        simplify(state.polygon, {
-            mutate: true,
-            tolerance: tolerance,
-            highQuality: true
-        });
-
+        this.simplify(state.polygon);
         this.fireUpdate();
         this.changeMode(modes.SIMPLE_SELECT, { featureIds: [state.polygon.id] });
     }
 }
 
-FreeDraw.onTouchEnd = function(state, e) {
+FreehandMode.onTouchEnd = function(state, e) {
     this.onMouseUp(state, e)
 }
 
-FreeDraw.fireUpdate = function() {
+FreehandMode.fireUpdate = function() {
     this.map.fire(events.UPDATE, {
         action: updateActions.MOVE,
         features: this.getSelected().map(f => f.toGeoJSON())
     });
 };
 
-export default FreeDraw
+FreehandMode.simplify = function(polygon) {
+  const tolerance = 1 / Math.pow(1.05, 10 * this.map.getZoom()) // https://www.desmos.com/calculator/nolp0g6pwr
+  simplify(polygon, {
+      mutate: true,
+      tolerance: tolerance,
+      highQuality: true
+  });
+}
+
+export default FreehandMode
