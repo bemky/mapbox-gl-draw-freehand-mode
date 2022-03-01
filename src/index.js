@@ -72,4 +72,11 @@ FreehandMode.simplify = function(polygon) {
   });
 }
 
+FreehandMode.onStop = function () {
+  setTimeout(() => {
+    if (!this.map || !this.map.dragPan) return;
+    this.map.dragPan.enable();
+  }, 0);
+};
+  
 export default FreehandMode
