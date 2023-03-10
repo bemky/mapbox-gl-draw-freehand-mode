@@ -35,7 +35,7 @@ map.addControl(Draw)
 
 ## Configuration
 ### Simplification
-By default FreehandMode will simplify. Turf's [simlify](https://www.npmjs.com/package/@turf/simplify) method takes a polygon and simplifies it based on a `tolerance`. The tolerance is corelated to meters, so tolerance must change based on the zoom, if not simplification will vary wildly based on zoom level. Thus, FreehandMode's simplify calculates a tolerance based on zoom.
+By default FreehandMode will simplify. Turf's [simplify](https://www.npmjs.com/package/@turf/simplify) method takes a polygon and simplifies it based on a `tolerance`. The tolerance is corelated to meters, so tolerance must change based on the zoom, if not simplification will vary wildly based on zoom level. Thus, FreehandMode's simplify calculates a tolerance based on zoom.
 
 You can configure you're own simplify method by redefing it on the object
 
