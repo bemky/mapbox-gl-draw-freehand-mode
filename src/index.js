@@ -73,7 +73,7 @@ FreehandMode.simplify = function(polygon) {
 }
 
 FreehandMode.onStop = function (state) {
-  DrawPolygon.call(this, state)
+  DrawPolygon.onStop.call(this, state)
   setTimeout(() => {
     if (!this.map || !this.map.dragPan) return;
     this.map.dragPan.enable();
