@@ -1,6 +1,6 @@
 import FreehandMode from '../src/index.js';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZWhta2UiLCJhIjoiY2plYTl6b3c2MHg5ODJxbGV4aXR4Z3p6YSJ9.d3jSAbsqSmpJwyVcp9iXbw';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZWhta2UiLCJhIjoiY21hemlta3VlMGxhOTJqcHBkd3I5dXZnaiJ9.NzonVD9l39XPYIkIfyFi9w';
   var map = new mapboxgl.Map({
   container: document.getElementById('map'),
   style: 'mapbox://styles/mapbox/streets-v11',
