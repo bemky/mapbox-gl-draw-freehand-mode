@@ -1,4 +1,4 @@
-# Mapbox Free Draw Mode
+# Mapbox Freehand Draw Mode
 
 This is a custom mode for [@mapbox/mapbox-gl-draw]() that adds draw functionality to the draw polygon mode.
 
