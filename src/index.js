@@ -1,9 +1,10 @@
-import DrawPolygon from '@mapbox/mapbox-gl-draw/src/modes/draw_polygon';
-import {geojsonTypes, cursors, types, updateActions, modes, events} from '@mapbox/mapbox-gl-draw/src/constants';
+import MapboxGlDraw from '@mapbox/mapbox-gl-draw';
 import simplify from "@turf/simplify";
+const {
+    geojsonTypes, cursors, types, updateActions, modes, events
+} = MapboxGlDraw.constants;
 
-const FreehandMode = Object.assign({}, DrawPolygon)
-
+const FreehandMode = Object.assign({}, MapboxGlDraw.modes.draw_polygon)
 FreehandMode.onSetup = function() {
     const polygon = this.newFeature({
         type: geojsonTypes.FEATURE,
@@ -64,20 +65,25 @@ FreehandMode.fireUpdate = function() {
 };
 
 FreehandMode.simplify = function(polygon) {
-  const tolerance = 1 / Math.pow(1.05, 10 * this.map.getZoom()) // https://www.desmos.com/calculator/nolp0g6pwr
-  simplify(polygon, {
-      mutate: true,
-      tolerance: tolerance,
-      highQuality: true
-  });
+    const tolerance = 1 / Math.pow(1.05, 10 * this.map.getZoom()) // https://www.desmos.com/calculator/nolp0g6pwr
+    simplify(polygon, {
+        mutate: true,
+        tolerance: tolerance,
+        highQuality: true
+    });
 }
 
-FreehandMode.onStop = function (state) {
-  DrawPolygon.call(this, state)
-  setTimeout(() => {
-    if (!this.map || !this.map.dragPan) return;
-    this.map.dragPan.enable();
-  }, 0);
+FreehandMode.fire = function() {
+    return this.map.fire
+}
+
+FreehandMode.onStop = function (state, ...args) {
+    MapboxGlDraw.modes.draw_polygon.onStop.call(this, state, ...args)
+    
+    setTimeout(() => {
+        if (!this.map || !this.map.dragPan) return;
+        this.map.dragPan.enable();
+    }, 0);
 };
   
 export default FreehandMode

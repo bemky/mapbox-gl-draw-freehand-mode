@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-draw-freehand-mode",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "a free drawing plugin for mapbox-gl-draw",
   "main": "src/index.js",
   "scripts": {
@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/bemky/mapbox-gl-draw-free-mode#readme",
   "devDependencies": {
-    "webpack": "^5.38.1",
+    "webpack": "^5.99.9",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-draw": "^1.3.0",
-    "@turf/simplify": "^6.3.0"
+    "@mapbox/mapbox-gl-draw": "^1.5.0",
+    "@turf/simplify": "^6.5.0"
   }
 }
